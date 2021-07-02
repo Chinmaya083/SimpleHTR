@@ -17,6 +17,11 @@ env = lmdb.open(str(args.data_dir / 'lmdb'), map_size=1024 * 1024 * 1024 * 2)
 fn_imgs = list((args.data_dir / 'img').walkfiles('*.png'))
 
 # and put the imgs into lmdb as pickled grayscale imgs
+'''
+What pickle does is that it “serializes” the object first before writing it to file. 
+Pickling is a way to convert a python object (list, dict, etc.) into a character stream. 
+The idea is that this character stream contains all the information necessary to reconstruct the object in another python script.
+'''
 with env.begin(write=True) as txn:
     for i, fn_img in enumerate(fn_imgs):
         print(i, len(fn_imgs))
